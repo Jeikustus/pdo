@@ -22,20 +22,26 @@ export const RegisterTab = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userDepartment, setUserDepartment] = useState("Select department");
+  const [error, setError] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await handleSignUp(
+        userEmail,
+        userPassword,
+        userFirstName,
+        userLastName,
+        userDepartment,
+        setError
+      );
+    } catch (error) {
+      console.error("Error during sign-up:", error);
+    }
+  };
 
   const handleDepartmentSelect = (department: string) => {
     setUserDepartment(department);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSignUp(
-      userEmail,
-      userPassword,
-      userFirstName,
-      userLastName,
-      userDepartment
-    );
   };
 
   return (
@@ -88,10 +94,10 @@ export const RegisterTab = () => {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={() =>
-                      handleDepartmentSelect("City Engineers Office")
+                      handleDepartmentSelect("City Engineering Office")
                     }
                   >
-                    CEO - City Engineers Office
+                    CEO - City Engineering Office
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => handleDepartmentSelect("City Mayors Office")}
@@ -100,10 +106,10 @@ export const RegisterTab = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>
-                      handleDepartmentSelect("Department General Services")
+                      handleDepartmentSelect("Department of General Services")
                     }
                   >
-                    DGS - Department Services Office
+                    DGS - Department of General Services
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>
@@ -114,10 +120,10 @@ export const RegisterTab = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>
-                      handleDepartmentSelect("City Affairs Office")
+                      handleDepartmentSelect("Community Affairs Office")
                     }
                   >
-                    CAO - City Affairs Office
+                    CAO - Community Affairs Office
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>

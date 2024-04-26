@@ -1,14 +1,12 @@
-import { createUserWithEmailAndPassword as createUserWithEmailAndPasswordFirebase, Auth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase, sendPasswordResetEmail, } from "firebase/auth";
-import {  conAuth, conDatabase } from "./firebaseConfig"; 
+import { createUserWithEmailAndPassword as createUserWithEmailAndPasswordFirebase, signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase, sendPasswordResetEmail, Auth } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "@firebase/storage";
+import { conAuth, conDatabase } from "./firebaseConfig";
 
 
 export const createUserWithEmailAndPassword = async (
   userEmail: string,
   userPassword: string,
-  userFirstName: string,
-  userLastName: string,
+  userDisplayName: string,
   userDepartment: string
 ) => {
   try {
@@ -19,47 +17,58 @@ export const createUserWithEmailAndPassword = async (
     );
     const { uid } = userCredential.user;
 
-    let userDocPath: string | undefined; 
+    let userDocPath: string | undefined;
 
-    if (userDepartment === "City Engineers Office") {
-      userDocPath = `users/ceo/${uid}`;
-    } else if (userDepartment === "City Mayors Office") {
-      userDocPath = `users/cmo/${uid}`;
-    } else if (userDepartment === "Department General Services") {
-        userDocPath = `users/dgs/${uid}`;
-    } else if (userDepartment === "Office Strategic Management") {
-        userDocPath = `users/osm/${uid}`;
-    } else if (userDepartment === "City Affairs Office") {
-        userDocPath = `users/cao/${uid}`;
-    } else if (userDepartment === "Manduae City Enforcement Unit") {
-        userDocPath = `users/mceu/${uid}`;
-    } else if (userDepartment === "Purok Development Office") {
-        userDocPath = `users/pdo/${uid}`;
-    } else if (userDepartment === "City Admin") {
-        userDocPath = `users/cityadmin/${uid}`;
-    } else {
-      throw new Error("Invalid department specified.");
+    switch (userDepartment) {
+      case "City Engineering Office":
+        userDocPath = `accounts/users/ceo/${uid}`;
+        break;
+      case "City Mayors Office":
+        userDocPath = `accounts/users/cmo/${uid}`;
+        break;
+      case "Department of General Services":
+        userDocPath = `accounts/users/dgs/${uid}`;
+        break;
+      case "Office Strategic Management":
+        userDocPath = `accounts/users/osm/${uid}`;
+        break;
+      case "Community Affairs Office":
+        userDocPath = `accounts/users/cao/${uid}`;
+        break;
+      case "Manduae City Enforcement Unit":
+        userDocPath = `accounts/users/mceu/${uid}`;
+        break;
+      case "Purok Development Office":
+        userDocPath = `accounts/users/pdo/${uid}`;
+        break;
+      case "City Admin":
+        userDocPath = `accounts/users/cityadmin/${uid}`;
+        break;
+      default:
+        throw new Error("Invalid department specified.");
     }
 
     const userData = {
       userID: uid,
       userEmail,
-      userFirstName,
-      userLastName,
+      userDisplayName,
       userDepartment,
+      userAccountType: "Viewer",
+      userAccountStatus: "Pending",
       authProvider: "local",
     };
 
     if (userDocPath) {
       await setDoc(doc(conDatabase, userDocPath), userData);
+      console.log("User document created successfully");
     } else {
       throw new Error("Invalid division specified.");
     }
   } catch (error) {
+    console.error("Error creating user document:", error);
     throw error;
   }
 };
-
 
 export const signInWithEmailAndPassword = async (userEmail: string, userPassword: string) => {
   try {

@@ -1,20 +1,37 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { InputWithLabel } from "@/components/ui/inputwithlabel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { handleLogin } from "./functions";
-import { useState } from "react";
+import { Building2 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAppContext } from "@/context";
 
 export const LoginTab = () => {
   const [userEmail, setUserEmail] = useState<string>("");
+  const [userDepartment, setUserDepartment] = useAppContext();
   const [userPassword, setUserPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleDepartmentSelect = (department: string) => {
+    setUserDepartment(department);
+    console.log(department);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleLogin(userEmail, userPassword);
+    console.log("Login successful");
   };
 
   return (
@@ -51,6 +68,71 @@ export const LoginTab = () => {
               value={userPassword}
               onChange={(e) => setUserPassword(e.target.value)}
             />
+            <div>
+              <DropdownMenu>
+                <div className="grid w-full items-center gap-1.5">
+                  <Label>Department</Label>
+                  <DropdownMenuTrigger className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-muted-foreground items-center">
+                    <Building2 />
+                    <p className="text-transparent">t</p> {userDepartment}
+                  </DropdownMenuTrigger>
+                </div>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Department</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() =>
+                      handleDepartmentSelect("City Engineering Office")
+                    }
+                  >
+                    CEO - City Engineering Office
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleDepartmentSelect("City Mayors Office")}
+                  >
+                    CMO - City Mayors Office
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      handleDepartmentSelect("Department of General Services")
+                    }
+                  >
+                    DGS - Department of General Services
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      handleDepartmentSelect("Office Strategic Management")
+                    }
+                  >
+                    OSM - Office Strategic Management
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      handleDepartmentSelect("Community Affairs Office")
+                    }
+                  >
+                    CAO - Community Affairs Office
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      handleDepartmentSelect("Manduae City Enforcement Unit")
+                    }
+                  >
+                    MCEU - Manduae City Enforcement Unit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleDepartmentSelect("pdo")}
+                  >
+                    PDO - Purok Development Office
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleDepartmentSelect("City Admin")}
+                  >
+                    City Admin
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
           <div className="flex items-center justify-between pb-6">
             <div className="flex items-center space-x-1">
@@ -69,7 +151,7 @@ export const LoginTab = () => {
         </div>
       </div>
       <div className="w-full flex justify-center items-center animate-pulse">
-        <Image src="/pdo.png" alt="image" width={350} height={100} priority />
+        <Image src="/pdo.png" alt="image" width={240} height={100} priority />
       </div>
     </div>
   );
