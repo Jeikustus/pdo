@@ -6,12 +6,9 @@ import { CircleUser, LogOut } from "lucide-react";
 import { useFetchUserData } from "@/config/firebase/firebaseFetchUser";
 import { Button } from "@/components/ui/button";
 import { handleLogout } from "./functions";
-import { useAppContext } from "@/context";
 
 const DashboardPage = () => {
-  const [userDepartment] = useAppContext();
-  console.log(userDepartment);
-  const userData = useFetchUserData("pdo");
+  const userData = useFetchUserData();
   console.log(userData);
 
   return (

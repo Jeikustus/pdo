@@ -3,14 +3,18 @@
 import { useEffect, useState } from "react";
 import { conAuth, conDatabase } from "./firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
+import { useAppContext } from "@/context";
 
-export const useFetchUserData = (userDepartment: string) => {
+export const useFetchUserData = () => {
+  const [userDepartment] = useAppContext();
+  console.log(userDepartment);
+
   const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
     const unsubscribe = conAuth.onAuthStateChanged((user) => {
       if (user) {
-        fetchUserData(user.uid, userDepartment);
+        fetchUserData(user.uid);
       } else {
         console.error("No user authenticated");
         setUserData(null);
@@ -19,9 +23,9 @@ export const useFetchUserData = (userDepartment: string) => {
     return () => unsubscribe();
   }, [userDepartment]);
 
-  const fetchUserData = async (uid: string, userDepartment: string) => {
+  const fetchUserData = async (uid: string) => {
     try {
-      const userDocRef = doc(conDatabase, `accounts/users/${userDepartment}/${uid}`);
+      const userDocRef = doc(conDatabase, `users/${uid}`);
       const userDocSnapshot = await getDoc(userDocRef);
       
       if (userDocSnapshot.exists()) {

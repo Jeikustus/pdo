@@ -10,59 +10,42 @@ export const createUserWithEmailAndPassword = async (
   userDepartment: string
 ) => {
   try {
+    // Create user with email and password
     const userCredential = await createUserWithEmailAndPasswordFirebase(
       conAuth,
       userEmail,
       userPassword
     );
+
     const { uid } = userCredential.user;
 
-    let userDocPath: string | undefined;
+    let validDepartments = [
+      "City Engineering Office",
+      "City Mayors Office",
+      "Department of General Services",
+      "Office Strategic Management",
+      "Community Affairs Office",
+      "Manduae City Enforcement Unit",
+      "Purok Development Office",
+      "City Admin",
+    ];
 
-    switch (userDepartment) {
-      case "City Engineering Office":
-        userDocPath = `accounts/users/ceo/${uid}`;
-        break;
-      case "City Mayors Office":
-        userDocPath = `accounts/users/cmo/${uid}`;
-        break;
-      case "Department of General Services":
-        userDocPath = `accounts/users/dgs/${uid}`;
-        break;
-      case "Office Strategic Management":
-        userDocPath = `accounts/users/osm/${uid}`;
-        break;
-      case "Community Affairs Office":
-        userDocPath = `accounts/users/cao/${uid}`;
-        break;
-      case "Manduae City Enforcement Unit":
-        userDocPath = `accounts/users/mceu/${uid}`;
-        break;
-      case "Purok Development Office":
-        userDocPath = `accounts/users/pdo/${uid}`;
-        break;
-      case "City Admin":
-        userDocPath = `accounts/users/cityadmin/${uid}`;
-        break;
-      default:
-        throw new Error("Invalid department specified.");
-    }
+    if (validDepartments.includes(userDepartment)) {
+      const userData = {
+        userID: uid,
+        userEmail,
+        userDisplayName,
+        userDepartment,
+        userAccountType: "Viewer",
+        userAccountStatus: "Pending",
+        authProvider: "local",
+      };
 
-    const userData = {
-      userID: uid,
-      userEmail,
-      userDisplayName,
-      userDepartment,
-      userAccountType: "Viewer",
-      userAccountStatus: "Pending",
-      authProvider: "local",
-    };
-
-    if (userDocPath) {
-      await setDoc(doc(conDatabase, userDocPath), userData);
+      // Set user document in the database
+      await setDoc(doc(conDatabase, `users/${uid}`), userData);
       console.log("User document created successfully");
     } else {
-      throw new Error("Invalid division specified.");
+      throw new Error("Invalid department specified.");
     }
   } catch (error) {
     console.error("Error creating user document:", error);

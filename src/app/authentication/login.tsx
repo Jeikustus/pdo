@@ -20,13 +20,7 @@ import { useAppContext } from "@/context";
 
 export const LoginTab = () => {
   const [userEmail, setUserEmail] = useState<string>("");
-  const [userDepartment, setUserDepartment] = useAppContext();
   const [userPassword, setUserPassword] = useState<string>("");
-
-  const handleDepartmentSelect = (department: string) => {
-    setUserDepartment(department);
-    console.log(department);
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,71 +62,6 @@ export const LoginTab = () => {
               value={userPassword}
               onChange={(e) => setUserPassword(e.target.value)}
             />
-            <div>
-              <DropdownMenu>
-                <div className="grid w-full items-center gap-1.5">
-                  <Label>Department</Label>
-                  <DropdownMenuTrigger className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-muted-foreground items-center">
-                    <Building2 />
-                    <p className="text-transparent">t</p> {userDepartment}
-                  </DropdownMenuTrigger>
-                </div>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Department</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={() =>
-                      handleDepartmentSelect("City Engineering Office")
-                    }
-                  >
-                    CEO - City Engineering Office
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleDepartmentSelect("City Mayors Office")}
-                  >
-                    CMO - City Mayors Office
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() =>
-                      handleDepartmentSelect("Department of General Services")
-                    }
-                  >
-                    DGS - Department of General Services
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() =>
-                      handleDepartmentSelect("Office Strategic Management")
-                    }
-                  >
-                    OSM - Office Strategic Management
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() =>
-                      handleDepartmentSelect("Community Affairs Office")
-                    }
-                  >
-                    CAO - Community Affairs Office
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() =>
-                      handleDepartmentSelect("Manduae City Enforcement Unit")
-                    }
-                  >
-                    MCEU - Manduae City Enforcement Unit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleDepartmentSelect("pdo")}
-                  >
-                    PDO - Purok Development Office
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleDepartmentSelect("City Admin")}
-                  >
-                    City Admin
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
           </div>
           <div className="flex items-center justify-between pb-6">
             <div className="flex items-center space-x-1">
