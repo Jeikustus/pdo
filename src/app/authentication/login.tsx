@@ -16,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAppContext } from "@/context";
+import { useAppContext } from "@/context/useAppRouter";
 
 export const LoginTab = () => {
   const [userEmail, setUserEmail] = useState<string>("");

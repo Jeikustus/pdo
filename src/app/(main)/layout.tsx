@@ -1,4 +1,5 @@
-import { NavigationBar } from "./navigation";
+import { ProtectedRouteWrapper } from "@/context/protectedroute";
+import { NavigationBar } from "../../components/navigation";
 import { Footer } from "@/components/footer";
 
 type Props = {
@@ -8,9 +9,11 @@ type Props = {
 export default function Layout({ children }: Props) {
   return (
     <>
-      <NavigationBar />
-      <div>{children}</div>
-      <Footer />
+      <ProtectedRouteWrapper>
+        <NavigationBar />
+        <div>{children}</div>
+        <Footer />
+      </ProtectedRouteWrapper>
     </>
   );
 }

@@ -75,6 +75,7 @@ export const resetPassword = async (auth: Auth, userEmail: string) => {
 export const logoutUser = async (): Promise<void> => {
   try {
     await conAuth.signOut();
+    window.location.href = "/";
   } catch (error) {
     throw error;
   }

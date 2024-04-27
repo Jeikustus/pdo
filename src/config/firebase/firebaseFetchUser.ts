@@ -3,11 +3,8 @@
 import { useEffect, useState } from "react";
 import { conAuth, conDatabase } from "./firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { useAppContext } from "@/context";
 
 export const useFetchUserData = () => {
-  const [userDepartment] = useAppContext();
-  console.log(userDepartment);
 
   const [userData, setUserData] = useState<any>(null);
 
@@ -21,7 +18,7 @@ export const useFetchUserData = () => {
       }
     });
     return () => unsubscribe();
-  }, [userDepartment]);
+  });
 
   const fetchUserData = async (uid: string) => {
     try {

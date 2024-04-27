@@ -6,11 +6,13 @@ import { LinkWithIcon } from "@/components/ui/linkwithicon";
 import { useFetchUserData } from "@/config/firebase/firebaseFetchUser";
 import {
   BadgePlus,
+  CircleAlert,
   CircleUser,
   CircleX,
   FilePenLine,
   LayoutDashboard,
   LogOut,
+  LogOutIcon,
   MessageSquareHeart,
   Search,
   ShieldEllipsis,
@@ -18,7 +20,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { handleLogout } from "./dashboard/functions";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,7 +27,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import Image from "next/image";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { logoutUser } from "@/config/firebase/firebaseAuthentication";
+import { Separator } from "./ui/separator";
 
 export const NavigationBar = () => {
   const userData = useFetchUserData();
@@ -85,7 +100,7 @@ export const NavigationBar = () => {
           {userData && (
             <div className="flex items-center space-x-3 font-medium">
               <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger className="hover:text-accent">
                   {userData.userDisplayName}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -94,13 +109,36 @@ export const NavigationBar = () => {
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Ask help</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={handleLogout}
-                    className="font-medium"
-                  >
-                    <LogOut className="h-4" />
-                    Logout
-                  </DropdownMenuItem>
+                  <div className="flex items-center text-sm hover:bg-accent p-1 rounded-sm">
+                    <LogOutIcon className="h-4" />
+                    <AlertDialog>
+                      <AlertDialogTrigger>Logout</AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader className="flex justify-center items-center">
+                          <Image
+                            src="question.svg"
+                            alt="quesrion"
+                            priority
+                            width={200}
+                            height={200}
+                          />
+                          <AlertDialogTitle className="font-bold text-2xl">
+                            Come back soon!
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to Log out?
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <Separator />
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={logoutUser}>
+                            Continue
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
                 </DropdownMenuContent>
               </DropdownMenu>
               <Avatar>
