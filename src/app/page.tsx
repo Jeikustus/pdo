@@ -6,7 +6,7 @@ export default function Home() {
   useEffect(() => {
     const redirectTimer = setTimeout(() => {
       window.location.href = "/authentication";
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(redirectTimer);
   }, []);

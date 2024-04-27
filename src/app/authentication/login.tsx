@@ -80,7 +80,7 @@ export const LoginTab = () => {
         </div>
       </div>
       <div className="w-full flex justify-center items-center animate-pulse">
-        <Image src="/pdo.png" alt="image" width={240} height={100} priority />
+        <Image src="/pdo.png" alt="image" width={380} height={100} priority />
       </div>
     </div>
   );

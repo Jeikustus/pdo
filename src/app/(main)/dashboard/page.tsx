@@ -9,7 +9,6 @@ import { handleLogout } from "./functions";
 
 const DashboardPage = () => {
   const userData = useFetchUserData();
-  console.log(userData);
 
   return (
     <div>

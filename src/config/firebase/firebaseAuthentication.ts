@@ -10,7 +10,6 @@ export const createUserWithEmailAndPassword = async (
   userDepartment: string
 ) => {
   try {
-    // Create user with email and password
     const userCredential = await createUserWithEmailAndPasswordFirebase(
       conAuth,
       userEmail,
@@ -41,7 +40,6 @@ export const createUserWithEmailAndPassword = async (
         authProvider: "local",
       };
 
-      // Set user document in the database
       await setDoc(doc(conDatabase, `users/${uid}`), userData);
       console.log("User document created successfully");
     } else {
