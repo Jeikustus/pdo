@@ -2,14 +2,14 @@
 
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CircleUser, LogOut } from "lucide-react";
+import { CircleUser } from "lucide-react";
 import { useFetchUserData } from "@/config/firebase/firebaseFetchUser";
 
 const DashboardPage = () => {
   const userData = useFetchUserData();
 
   return (
-    <div>
+    <div className="h-screen">
       {userData && (
         <>
           <Avatar>

@@ -1,22 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { InputWithLabel } from "@/components/ui/inputwithlabel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { handleLogin } from "./functions";
-import { Building2 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useAppContext } from "@/context/useAppRouter";
 
 export const LoginTab = () => {
   const [userEmail, setUserEmail] = useState<string>("");
@@ -50,7 +40,7 @@ export const LoginTab = () => {
               label="Email"
               type="email"
               id="email"
-              placeholder="your@gmail.com"
+              placeholder="you@gmail.com"
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
             />
@@ -79,7 +69,7 @@ export const LoginTab = () => {
           <p className="font-medium">Sign up here</p>
         </div>
       </div>
-      <div className="w-full flex justify-center items-center animate-pulse">
+      <div className="w-full flex justify-center items-center">
         <Image src="/pdo.png" alt="image" width={380} height={100} priority />
       </div>
     </div>

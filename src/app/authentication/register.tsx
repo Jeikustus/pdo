@@ -151,7 +151,7 @@ export const RegisterTab = () => {
               label="Email"
               type="email"
               id="email"
-              placeholder="your@gmail.com"
+              placeholder="you@gmail.com"
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
             />

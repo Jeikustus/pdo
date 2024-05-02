@@ -10,6 +10,10 @@ const config = {
 	],
   prefix: "",
   theme: {
+    fontFamily: {
+      general: ['General Sans', 'sans-serif'],
+      kollektif: ['Kollektif', 'sans-serif']
+    },
     container: {
       center: true,
       padding: "2rem",

@@ -90,11 +90,6 @@ export const NavigationBar = () => {
             label="Dashboard"
             icon={<LayoutDashboard />}
           />
-          <LinkWithIcon
-            href="/dashboard"
-            label="Dashboard"
-            icon={<LayoutDashboard />}
-          />
         </div>
         <div className="flex items-center">
           {userData && (
@@ -106,7 +101,13 @@ export const NavigationBar = () => {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      (window.location.href = `/profile/${userData.userID}.${userData.userDisplayName}`)
+                    }
+                  >
+                    Profile
+                  </DropdownMenuItem>
                   <DropdownMenuItem>Ask help</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <div className="flex items-center text-sm hover:bg-accent p-1 rounded-sm">
@@ -116,8 +117,8 @@ export const NavigationBar = () => {
                       <AlertDialogContent>
                         <AlertDialogHeader className="flex justify-center items-center">
                           <Image
-                            src="question.svg"
-                            alt="quesrion"
+                            src="/sad.svg"
+                            alt="question"
                             priority
                             width={200}
                             height={200}
@@ -143,7 +144,7 @@ export const NavigationBar = () => {
               </DropdownMenu>
               <Avatar>
                 <AvatarImage
-                  src={userData.userProfileURL}
+                  src={"/testpp.jpg"}
                   alt={userData.userDisplayName}
                 />
                 <AvatarFallback>

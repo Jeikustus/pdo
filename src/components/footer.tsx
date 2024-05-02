@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="w-full p-5 ">
+    <footer className="w-full p-5 text-primary">
       <Separator />
       <div className="grid grid-cols-3 p-5">
         <div className="flex justify-center items-center">
@@ -12,30 +12,28 @@ export const Footer = () => {
         </div>
         <div className="p-5">
           <div className="flex justify-center items-center space-x-3">
-            <p className="text-sm text-[#0c0c2e]">
-              &copy; 2024 All Rights Reserved.
-            </p>
+            <p className="text-sm ">&copy; 2024 All Rights Reserved.</p>
             <Link
               href={"/privacy-policy"}
-              className="text-sm font-medium text-[#0c0c2e] hover:underline hover:text-[#3399cc]"
+              className="text-sm font-medium  hover:underline hover:text-accent"
             >
               Privacy Policy
             </Link>
             <Link
               href={"/terms-of-services"}
-              className="text-sm font-medium text-[#0c0c2e] hover:underline hover:text-[#3399cc]"
+              className="text-sm font-medium hover:underline hover:text-accent"
             >
               Terms of Service
             </Link>
             <Link
               href={"/contact-us"}
-              className="text-sm font-medium  text-[#0c0c2e] hover:underline hover:text-[#3399cc]"
+              className="text-sm font-medium  hover:underline hover:text-accent"
             >
               Contact Us
             </Link>
           </div>
         </div>
-        <div className="flex justify-center items-center space-x-3 text-[#3399cc]">
+        <div className="flex justify-center items-center space-x-3 hover:text-accent hover:animate-pulse">
           <Twitter />
           <Facebook />
           <Instagram />

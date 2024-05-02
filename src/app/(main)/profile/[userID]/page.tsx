@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useFetchUserData } from "@/config/firebase/firebaseFetchUser";
-import { CircleUser } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -18,7 +17,7 @@ export default function UserDetails({ params: { userID } }: Props) {
   return (
     <main className="px-24 pt-5 h-screen">
       <div className="grid grid-cols-6">
-        <div className="bg-green-100 col-span-2 ">
+        <div className="col-span-2 ">
           <div className="flex flex-col justify-center items-center bg-white shadow-md rounded-md m-5 min-h-full">
             <div className="flex items-center pb-5">
               <div className="relative w-40 h-40 rounded-full overflow-hidden ring-2 ring-accent animate-spin">
@@ -58,13 +57,13 @@ export default function UserDetails({ params: { userID } }: Props) {
             <div>
               <p>{userData && userData.userBio}</p>
             </div>
-            <div className="flex pt-10 text-[10px] space-x-2 text-slate-400 animate-pulse font-mono">
+            <div className="flex pt-10 text-[10px] space-x-2 text-slate-100 animate-pulse font-mono">
               <em>user id: </em>
-              <p>{userID}</p>
+              <p>{userData.userID}</p>
             </div>
           </div>
         </div>
-        <div className="bg-red-100 col-span-4">
+        <div className="col-span-4">
           <div className="flex flex-col justify-center items-center bg-white shadow-md rounded-md m-5 min-h-96"></div>
         </div>
       </div>
