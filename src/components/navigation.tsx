@@ -42,6 +42,7 @@ import Image from "next/image";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { logoutUser } from "@/config/firebase/firebaseAuthentication";
 import { Separator } from "./ui/separator";
+import { LogoAnimation } from "./logo";
 
 export const NavigationBar = () => {
   const userData = useFetchUserData();
@@ -50,12 +51,7 @@ export const NavigationBar = () => {
     <nav className="shadow-md px-20">
       <div className="p-5 flex justify-between items-center">
         <div className="flex items-center">
-          <div className="flex space-x-2 items-center dark:invert">
-            <span className="sr-only">Loading...</span>
-            <div className="h-5 w-5 bg-[#00458b] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-            <div className="h-5 w-5 bg-[#059d2f] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-            <div className="h-5 w-5 bg-[#f2ba03] rounded-full animate-bounce"></div>
-          </div>
+          <LogoAnimation />
         </div>
         <div className="flex items-center space-x-3">
           {userData && (

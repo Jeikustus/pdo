@@ -59,7 +59,7 @@ export default function UserDetails({ params: { userID } }: Props) {
             </div>
             <div className="flex pt-10 text-[10px] space-x-2 text-slate-100 animate-pulse font-mono">
               <em>user id: </em>
-              <p>{userData.userID}</p>
+              <p>{userID}</p>
             </div>
           </div>
         </div>
