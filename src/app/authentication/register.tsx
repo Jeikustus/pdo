@@ -168,7 +168,7 @@ export const RegisterTab = () => {
             <div className="flex items-center space-x-1">
               <Checkbox id="agree" />
               <Label htmlFor="agree">
-                By signing up, you are creating a account that can access
+                By signing up, you are creating an account that can access
                 private data.
               </Label>
             </div>
